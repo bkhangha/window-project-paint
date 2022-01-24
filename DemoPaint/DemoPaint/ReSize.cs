@@ -53,8 +53,8 @@ namespace DemoPaint
             {
                 Cursor = Cursors.SizeAll,
                 SnapsToDevicePixels = true,
-                BorderBrush = Brushes.Transparent,
-                Background = Brushes.Transparent,
+                BorderBrush = System.Windows.Media.Brushes.Transparent,
+                Background = System.Windows.Media.Brushes.Transparent,
                 Opacity = 0
             };
             moveThumb.Width = adornedElement.Width;
@@ -268,8 +268,8 @@ namespace DemoPaint
             if (adornedElement == null) return;
 
             //adornedElement.Parent.SetValue(RenderOptions.EdgeModeProperty, EdgeMode.Unspecified);
-            Pen BorderPen = new Pen(Brushes.Blue, 1) { DashStyle = DashStyles.Dash };
-            drawingContext.DrawRectangle(Brushes.Transparent, BorderPen, new Rect(0, 0, adornedElement.Width, adornedElement.Height));
+            Pen BorderPen = new Pen(System.Windows.Media.Brushes.Blue, 1) { DashStyle = DashStyles.Dash };
+            drawingContext.DrawRectangle(System.Windows.Media.Brushes.Transparent, BorderPen, new Rect(0, 0, adornedElement.Width, adornedElement.Height));
         }
 
         protected override int VisualChildrenCount

@@ -15,7 +15,7 @@ namespace DemoPaint
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ThuocTinhVe ttv = new ThuocTinhVe();
+        private Brushes ttv = new Brushes();
         private AdornerLayer adnrLayer;
         private VeAbstract XuLiVe;
         private byte indexMoreColor = 1;
@@ -28,7 +28,7 @@ namespace DemoPaint
         private void MyCanvas_Loaded(object sender, RoutedEventArgs e)
         {
             adnrLayer = AdornerLayer.GetAdornerLayer(MyCanvas);
-            ttv = new ThuocTinhVe() { };
+            ttv = new Brushes() { };
         }
 
         private void cbbShapes_SelectionChanged(object sender, SelectionChangedEventArgs e)

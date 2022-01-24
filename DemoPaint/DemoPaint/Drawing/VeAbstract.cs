@@ -21,7 +21,7 @@ namespace DemoPaint
 
         protected AdornerLayer adnrLayer;
         protected Canvas MyCanvas;
-        protected ThuocTinhVe thuocTinhVe;
+        protected Brushes thuocTinhVe;
 
         public void NotifyActionCreated(IHanhDong hd)
         {
@@ -31,7 +31,7 @@ namespace DemoPaint
             }
         }
 
-        public VeAbstract(Canvas canvas, ThuocTinhVe ttv)
+        public VeAbstract(Canvas canvas, Brushes ttv)
         {
             MyCanvas = canvas;
             adnrLayer = AdornerLayer.GetAdornerLayer(canvas);

@@ -20,7 +20,6 @@ C:\Users\ASUS\Documents\GitHub\window-project-paint\DemoPaint\DemoPaint\obj\Debu
 C:\Users\ASUS\Documents\GitHub\window-project-paint\DemoPaint\DemoPaint\obj\Debug\MainWindow.g.cs
 C:\Users\ASUS\Documents\GitHub\window-project-paint\DemoPaint\DemoPaint\obj\Debug\App.g.cs
 C:\Users\ASUS\Documents\GitHub\window-project-paint\DemoPaint\DemoPaint\obj\Debug\DemoPaint_MarkupCompile.cache
-C:\Users\ASUS\Documents\GitHub\window-project-paint\DemoPaint\DemoPaint\obj\Debug\DemoPaint_MarkupCompile.lref
 C:\Users\ASUS\Documents\GitHub\window-project-paint\DemoPaint\DemoPaint\obj\Debug\MainWindow.baml
 C:\Users\ASUS\Documents\GitHub\window-project-paint\DemoPaint\DemoPaint\obj\Debug\DemoPaint.g.resources
 C:\Users\ASUS\Documents\GitHub\window-project-paint\DemoPaint\DemoPaint\obj\Debug\DemoPaint.Properties.Resources.resources

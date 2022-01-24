@@ -11,7 +11,7 @@ namespace DemoPaint
         private Shape currShape = null;
         private Tools currTool;
 
-        public VeHinh(Canvas canvas, ThuocTinhVe ttv, Tools tool) : base(canvas, ttv)
+        public VeHinh(Canvas canvas, Brushes ttv, Tools tool) : base(canvas, ttv)
         {
             currTool = tool;
         }

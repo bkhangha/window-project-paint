@@ -58,13 +58,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ReSize.cs" />
-    <Compile Include="ThuocTinhVe.cs" />
+    <Compile Include="Brushes.cs" />
     <Compile Include="Ultilities.cs" />
     <Compile Include="UndoRedoManager.cs" />
-    <Compile Include="XuLyVe\Select.cs" />
-    <Compile Include="XuLyVe\VeAbstract.cs" />
-    <Compile Include="XuLyVe\VeHinh.cs" />
-    <Compile Include="XuLyVe\VeText.cs" />
+    <Compile Include="Drawing\Select.cs" />
+    <Compile Include="Drawing\VeAbstract.cs" />
+    <Compile Include="Drawing\VeHinh.cs" />
+    <Compile Include="Drawing\VeText.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

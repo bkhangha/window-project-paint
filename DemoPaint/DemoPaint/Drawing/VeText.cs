@@ -12,7 +12,7 @@ namespace DemoPaint
         private Rectangle selectRectangle;
         private TextBox currTextBox;
 
-        public VeText(Canvas canvas, ThuocTinhVe ttv) : base(canvas, ttv)
+        public VeText(Canvas canvas, Brushes ttv) : base(canvas, ttv)
         {
         }
 
@@ -68,10 +68,10 @@ namespace DemoPaint
                 {
                     selectRectangle = new Rectangle()
                     {
-                        Stroke = Brushes.Black,
+                        Stroke = System.Windows.Media.Brushes.Black,
                         StrokeDashArray = new DoubleCollection() { 4, 2 },
                         StrokeThickness = 1,
-                        Fill = Brushes.Transparent
+                        Fill = System.Windows.Media.Brushes.Transparent
                     };
 
                     MyCanvas.Children.Add(selectRectangle);
@@ -98,7 +98,6 @@ namespace DemoPaint
                     Foreground = thuocTinhVe.ColorOutLineBrush,
                     FontSize = thuocTinhVe.currSize,
                     FontFamily = thuocTinhVe.currFont,
-                    //Background = currTextBox.Background,
                     Background = thuocTinhVe.ColorFillBrush
                 };
 
