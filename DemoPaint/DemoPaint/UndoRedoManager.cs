@@ -1,62 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace DemoPaint
 {
-    abstract class IHanhDong
+    internal abstract class IHanhDong
     {
-        public virtual void Undo(Canvas canvas) { }
-        public virtual void Redo(Canvas canvas) { }
+        public virtual void Undo(Canvas canvas)
+        { }
+
+        public virtual void Redo(Canvas canvas)
+        { }
     }
-    class HanhDongThem : IHanhDong
+
+    internal class HanhDongThem : IHanhDong
     {
-        UIElement uiElement;
+        private UIElement uiElement;
 
         public HanhDongThem(UIElement uie)
         {
             uiElement = uie;
         }
+
         public override void Undo(Canvas canvas)
         {
             canvas.Children.Remove(uiElement);
         }
+
         public override void Redo(Canvas canvas)
         {
             canvas.Children.Add(uiElement);
         }
     }
 
-    class HanhDongXoa : IHanhDong
+    internal class HanhDongXoa : IHanhDong
     {
-        UIElement uiElement;
+        private UIElement uiElement;
 
         public HanhDongXoa(UIElement uie)
         {
             uiElement = uie;
         }
+
         public override void Undo(Canvas canvas)
         {
             canvas.Children.Add(uiElement);
         }
+
         public override void Redo(Canvas canvas)
         {
             canvas.Children.Remove(uiElement);
         }
     }
 
-    class HanhDongChuoi : IHanhDong
+    internal class HanhDongChuoi : IHanhDong
     {
-        List<IHanhDong> chuoiHanhDong;
+        private List<IHanhDong> chuoiHanhDong;
 
         public HanhDongChuoi(List<IHanhDong> chd)
         {
             chuoiHanhDong = chd;
         }
+
         public override void Undo(Canvas canvas)
         {
             foreach (IHanhDong hd in chuoiHanhDong)
@@ -64,6 +70,7 @@ namespace DemoPaint
                 hd.Undo(canvas);
             }
         }
+
         public override void Redo(Canvas canvas)
         {
             foreach (IHanhDong hd in chuoiHanhDong)
@@ -73,11 +80,10 @@ namespace DemoPaint
         }
     }
 
-
-    class UndoRedoManager
+    internal class UndoRedoManager
     {
-        List<IHanhDong> UndoList = new List<IHanhDong>();
-        List<IHanhDong> RedoList = new List<IHanhDong>();
+        private List<IHanhDong> UndoList = new List<IHanhDong>();
+        private List<IHanhDong> RedoList = new List<IHanhDong>();
 
         public void Add(IHanhDong hanhdong)
         {
@@ -108,6 +114,5 @@ namespace DemoPaint
             UndoList.Add(temp);
             temp.Redo(canvas);
         }
-
     }
 }

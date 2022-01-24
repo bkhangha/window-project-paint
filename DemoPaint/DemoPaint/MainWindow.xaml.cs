@@ -1,21 +1,11 @@
-﻿//using Contract;
-//using Line2D;
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Win32;
 
 namespace DemoPaint
@@ -25,10 +15,10 @@ namespace DemoPaint
     /// </summary>
     public partial class MainWindow : Window
     {
-        ThuocTinhVe ttv = new ThuocTinhVe();
-        AdornerLayer adnrLayer;
-        VeAbstract XuLiVe;
-        byte indexMoreColor = 1;
+        private ThuocTinhVe ttv = new ThuocTinhVe();
+        private AdornerLayer adnrLayer;
+        private VeAbstract XuLiVe;
+        private byte indexMoreColor = 1;
 
         public MainWindow()
         {
@@ -41,7 +31,6 @@ namespace DemoPaint
             ttv = new ThuocTinhVe() { };
         }
 
-
         private void cbbShapes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (XuLiVe != null)
@@ -52,25 +41,30 @@ namespace DemoPaint
                 case 0:
                     XuLiVe = new VeHinh(MyCanvas, ttv, Tools.Line);
                     break;
+
                 case 1:
                     XuLiVe = new VeHinh(MyCanvas, ttv, Tools.Ellipse);
                     break;
+
                 case 2:
                     XuLiVe = new VeHinh(MyCanvas, ttv, Tools.Rectangle);
                     break;
+
                 case 3:
                     XuLiVe = new VeHinh(MyCanvas, ttv, Tools.Circle);
                     break;
+
                 case 4:
                     XuLiVe = new VeHinh(MyCanvas, ttv, Tools.Square);
                     break;
+
                 case 5:
                     XuLiVe = new VeText(MyCanvas, ttv);
                     break;
+
                 case 6:
                     XuLiVe = new Select(MyCanvas, ttv);
                     break;
-
             }
             XuLiVe.ActionCreated += new DoActionHandler(OnActionCreated);
         }
@@ -93,15 +87,19 @@ namespace DemoPaint
                 case 0:
                     ttv.FillType = Fills.NoFill;
                     break;
+
                 case 1:
                     ttv.FillType = Fills.Solid;
                     break;
+
                 case 2:
                     ttv.FillType = Fills.Linear;
                     break;
+
                 case 3:
                     ttv.FillType = Fills.Radial;
                     break;
+
                 case 4:
                     ttv.FillType = Fills.Image;
                     break;
@@ -115,30 +113,27 @@ namespace DemoPaint
                 case 0:
                     ttv.OutLineType = new DoubleCollection() { 1, 0 };
                     break;
+
                 case 1:
                     ttv.OutLineType = new DoubleCollection() { 1, 4 };
                     break;
+
                 case 2:
                     ttv.OutLineType = new DoubleCollection() { 4, 1 };
                     break;
+
                 case 3:
                     ttv.OutLineType = new DoubleCollection() { 4, 2, 1, 2 };
                     break;
             }
         }
 
-
         //============================================================================================
-
-
-
-
 
         private void MyCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (XuLiVe != null)
                 XuLiVe.XuLiMouseDown();
-
         }
 
         private void MyCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -155,14 +150,16 @@ namespace DemoPaint
 
         private void Paint_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (e.Key == Key.Delete)
             {
                 XuLiVe.Delete();
             }
         }
+
         #region x
-        bool selectedButtonColor1 = true;
+
+        private bool selectedButtonColor1 = true;
+
         private void btnColor_Click(object sender, RoutedEventArgs e)
         {
             if (selectedButtonColor1)
@@ -199,18 +196,23 @@ namespace DemoPaint
                     case 1:
                         btnMoreColor1.Background = br;
                         break;
+
                     case 2:
                         btnMoreColor2.Background = br;
                         break;
+
                     case 3:
                         btnMoreColor3.Background = br;
                         break;
+
                     case 4:
                         btnMoreColor4.Background = br;
                         break;
+
                     case 5:
                         btnMoreColor5.Background = br;
                         break;
+
                     case 6:
                         btnMoreColor6.Background = br;
                         break;
@@ -221,7 +223,6 @@ namespace DemoPaint
 
                 ttv.ColorOutLineBrush = btnColor1.Background;
                 ttv.ColorFillBrush = btnColor2.Background;
-
             }
         }
 
@@ -235,16 +236,12 @@ namespace DemoPaint
             selectedButtonColor1 = false;
         }
 
-
-
-
-
-
         //-----------------------------------------------
         private void btnCut_Click(object sender, RoutedEventArgs e)
         {
             XuLiVe.Cut();
         }
+
         private void btnCopy_Click(object sender, RoutedEventArgs e)
         {
             XuLiVe.Copy();
@@ -254,6 +251,7 @@ namespace DemoPaint
         {
             XuLiVe.Paste();
         }
+
         //---------------------------------------------------------
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
@@ -269,32 +267,42 @@ namespace DemoPaint
             {
                 //Image saveData = paintLogic.Save();
                 BitmapEncoder encoder;
+
                 #region Encoding
+
                 string extension = System.IO.Path.GetExtension(saveFileDialogue.FileName);
                 switch (extension.ToLower())
                 {
                     case ".jpeg":
                         encoder = new JpegBitmapEncoder();
                         break;
+
                     case ".png":
                         encoder = new PngBitmapEncoder();
                         break;
+
                     case ".gif":
                         encoder = new GifBitmapEncoder();
                         break;
+
                     case ".tiff":
                         encoder = new TiffBitmapEncoder();
                         break;
+
                     case ".wmf":
                         encoder = new WmpBitmapEncoder();
                         break;
+
                     case ".bmp":
                         encoder = new BmpBitmapEncoder();
                         break;
+
                     default:
                         return;
                 }
-                #endregion
+
+                #endregion Encoding
+
                 encoder.Frames.Add(saveData.Source as BitmapFrame);
                 using (FileStream file = File.Create(saveFileDialogue.FileName))
                 {
@@ -314,32 +322,42 @@ namespace DemoPaint
             {
                 Stream imageStreamSource = new FileStream(openFileDialogue.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 BitmapDecoder decoder;
+
                 #region Decoding
+
                 string extension = System.IO.Path.GetExtension(openFileDialogue.FileName);
                 switch (extension.ToLower())
                 {
                     case ".jpeg":
                         decoder = new JpegBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
                         break;
+
                     case ".png":
                         decoder = new PngBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
                         break;
+
                     case ".gif":
                         decoder = new GifBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
                         break;
+
                     case ".tiff":
                         decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
                         break;
+
                     case ".wmf":
                         decoder = new WmpBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
                         break;
+
                     case ".bmp":
                         decoder = new BmpBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
                         break;
+
                     default:
                         return;
                 }
-                #endregion
+
+                #endregion Decoding
+
                 BitmapSource LoadedBitmap = decoder.Frames[0];
                 MyCanvas.Children.Clear();
                 MyCanvas.Width = LoadedBitmap.Width;
@@ -347,19 +365,16 @@ namespace DemoPaint
                 MyCanvas.Children.Add(
                             new Image() { Source = LoadedBitmap }
                         );
-
-
             }
         }
 
-
-
-        #endregion
+        #endregion x
 
         //------------------------------------
         // undo redo
 
-        UndoRedoManager undoredoManager = new UndoRedoManager();
+        private UndoRedoManager undoredoManager = new UndoRedoManager();
+
         private void Undo_Click(object sender, RoutedEventArgs e)
         {
             undoredoManager.Undo(MyCanvas);
@@ -372,7 +387,6 @@ namespace DemoPaint
 
         private void cbbFont_Loaded(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void btnFont_Click(object sender, RoutedEventArgs e)

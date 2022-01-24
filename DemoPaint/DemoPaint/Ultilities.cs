@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace DemoPaint
 {
-    class Ultilities
+    internal class Ultilities
     {
-        static public Image Crop(Panel displayer, double x, double y, double Width, double Height)
+        public static Image Crop(Panel displayer, double x, double y, double Width, double Height)
         {
             if (displayer == null) return null;
 

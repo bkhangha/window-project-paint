@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -8,8 +6,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
-
 
 //---------------------------------------------
 // Lop nay tham khao va copy tren mang, khong phai do tu code
@@ -19,15 +15,16 @@ namespace DemoPaint
 {
     public class RectangleAdorner : Adorner
     {
-        // Resizing adorner uses Thumbs for visual elements.  
+        // Resizing adorner uses Thumbs for visual elements.
         // The Thumbs have built-in mouse input handling.
         public Thumb topEdge, bottomEdge, leftEdge, rightEdge;
+
         public Thumb topLeftCorner, topRightCorner, bottomLeftCorner, bottomRightCorner;
         public Thumb moveThumb;
         public Thumb rotateThumb;
 
         // To store and manage the adorner's visual children.
-        VisualCollection visualChildren;
+        private VisualCollection visualChildren;
 
         //=================================================================================================
         // Initialize the ResizingAdorner.
@@ -63,7 +60,6 @@ namespace DemoPaint
             moveThumb.Width = adornedElement.Width;
             moveThumb.Height = adornedElement.Height;
             visualChildren.Add(moveThumb);
-
 
             // Add handlers for resizing.
             topEdge.DragDelta += new DragDeltaEventHandler(HandleResize);
@@ -107,7 +103,7 @@ namespace DemoPaint
             if (adornedElement.Height.Equals(Double.NaN))
                 adornedElement.Height = adornedElement.DesiredSize.Height;
 
-            // Change the size by the amount the user drags the mouse, as long as it's larger 
+            // Change the size by the amount the user drags the mouse, as long as it's larger
             // than the width or height of an adorner, respectively.
 
             double Left = Canvas.GetLeft(adornedElement);
@@ -121,7 +117,6 @@ namespace DemoPaint
             }
             else if (hitThumb != leftEdge && hitThumb != rightEdge)
                 adornedElement.Height = Math.Max(adornedElement.Height + args.VerticalChange, hitThumb.DesiredSize.Height);
-
 
             if (hitThumb == leftEdge || hitThumb == topLeftCorner || hitThumb == bottomLeftCorner)
             {
@@ -151,9 +146,11 @@ namespace DemoPaint
         }
 
         //Handler for rotating
-        Point centerPoint;
-        Vector startVector;
-        double initialAngle;
+        private Point centerPoint;
+
+        private Vector startVector;
+        private double initialAngle;
+
         private void HandleBeginRotate(object sender, DragStartedEventArgs e)
         {
             FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
@@ -179,8 +176,8 @@ namespace DemoPaint
             {
                 this.initialAngle = (adornedElement.RenderTransform as RotateTransform).Angle;
             }
-
         }
+
         private void HandleRotating(object sender, DragDeltaEventArgs e)
         {
             FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
@@ -203,8 +200,8 @@ namespace DemoPaint
         // Arrange the Adorners.
         protected override Size ArrangeOverride(Size finalSize)
         {
-            // desiredWidth and desiredHeight are the width and height of the element that's being adorned.  
-            // These will be used to place the ResizingAdorner at the corners of the adorned element.  
+            // desiredWidth and desiredHeight are the width and height of the element that's being adorned.
+            // These will be used to place the ResizingAdorner at the corners of the adorned element.
             double desiredWidth = AdornedElement.DesiredSize.Width;
             double desiredHeight = AdornedElement.DesiredSize.Height;
             // adornerWidth & adornerHeight are used for placement as well.
@@ -243,9 +240,9 @@ namespace DemoPaint
             return finalSize;
         }
 
-        // Helper method to instantiate the corner Thumbs, set the Cursor property, 
+        // Helper method to instantiate the corner Thumbs, set the Cursor property,
         // set some appearance properties, and add the elements to the visual tree.
-        void BuildAdornerThumb(ref Thumb cornerThumb, Cursor customizedCursor)
+        private void BuildAdornerThumb(ref Thumb cornerThumb, Cursor customizedCursor)
         {
             if (cornerThumb != null) return;
 
@@ -263,7 +260,7 @@ namespace DemoPaint
             visualChildren.Add(cornerThumb);
         }
 
-        // Override the VisualChildrenCount and GetVisualChild properties to interface with 
+        // Override the VisualChildrenCount and GetVisualChild properties to interface with
         // the adorner's visual collection.
         protected override void OnRender(DrawingContext drawingContext)
         {
@@ -274,18 +271,22 @@ namespace DemoPaint
             Pen BorderPen = new Pen(Brushes.Blue, 1) { DashStyle = DashStyles.Dash };
             drawingContext.DrawRectangle(Brushes.Transparent, BorderPen, new Rect(0, 0, adornedElement.Width, adornedElement.Height));
         }
-        protected override int VisualChildrenCount { get { return visualChildren.Count; } }
-        protected override Visual GetVisualChild(int index) { return visualChildren[index]; }
+
+        protected override int VisualChildrenCount
+        { get { return visualChildren.Count; } }
+
+        protected override Visual GetVisualChild(int index)
+        { return visualChildren[index]; }
     }
 
     public class LineAdorner : Adorner
     {
-        // Resizing adorner uses Thumbs for visual elements.  
+        // Resizing adorner uses Thumbs for visual elements.
         // The Thumbs have built-in mouse input handling.
         public Thumb p1, p2;
 
         // To store and manage the adorner's visual children.
-        VisualCollection visualChildren;
+        private VisualCollection visualChildren;
 
         //=================================================================================================
         //Ctors
@@ -299,12 +300,10 @@ namespace DemoPaint
             BuildAdornerThumb(ref p1, Cursors.SizeNS);
             BuildAdornerThumb(ref p2, Cursors.SizeNS);
 
-
             // Add handlers for resizing.
             p1.DragDelta += new DragDeltaEventHandler(HandleResize);
             p2.DragDelta += new DragDeltaEventHandler(HandleResize);
         }
-
 
         //=================================================================================================
         // Handler for resizing.
@@ -344,10 +343,9 @@ namespace DemoPaint
             return finalSize;
         }
 
-
-        // Helper method to instantiate the corner Thumbs, set the Cursor property, 
+        // Helper method to instantiate the corner Thumbs, set the Cursor property,
         // set some appearance properties, and add the elements to the visual tree.
-        void BuildAdornerThumb(ref Thumb cornerThumb, Cursor customizedCursor)
+        private void BuildAdornerThumb(ref Thumb cornerThumb, Cursor customizedCursor)
         {
             if (cornerThumb != null) return;
 
@@ -364,22 +362,23 @@ namespace DemoPaint
             visualChildren.Add(cornerThumb);
         }
 
-
-        // Override the VisualChildrenCount and GetVisualChild properties to interface with 
+        // Override the VisualChildrenCount and GetVisualChild properties to interface with
         // the adorner's visual collection.
-        protected override int VisualChildrenCount { get { return visualChildren.Count; } }
-        protected override Visual GetVisualChild(int index) { return visualChildren[index]; }
+        protected override int VisualChildrenCount
+        { get { return visualChildren.Count; } }
+
+        protected override Visual GetVisualChild(int index)
+        { return visualChildren[index]; }
     }
 
     public class CanvasAdorner : Adorner
     {
-        // Resizing adorner uses Thumbs for visual elements.  
+        // Resizing adorner uses Thumbs for visual elements.
         // The Thumbs have built-in mouse input handling.
         public Thumb bottomEdge, rightEdge, bottomRightCorner;
 
         // To store and manage the adorner's visual children.
-        VisualCollection visualChildren;
-
+        private VisualCollection visualChildren;
 
         //=================================================================================================
         //Ctors
@@ -393,7 +392,6 @@ namespace DemoPaint
             BuildAdornerThumb(ref bottomEdge, Cursors.SizeNS);
             BuildAdornerThumb(ref rightEdge, Cursors.SizeWE);
             BuildAdornerThumb(ref bottomRightCorner, Cursors.SizeNWSE);
-
 
             // Add handlers for resizing.
             bottomEdge.DragDelta += new DragDeltaEventHandler(HandleResize);
@@ -417,7 +415,7 @@ namespace DemoPaint
             if (adornedElement.Height.Equals(Double.NaN))
                 adornedElement.Height = adornedElement.DesiredSize.Height;
 
-            // Change the size by the amount the user drags the mouse, as long as it's larger 
+            // Change the size by the amount the user drags the mouse, as long as it's larger
             // than the width or height of an adorner, respectively.
             if (hitThumb != rightEdge)
                 adornedElement.Height = Math.Max(adornedElement.Height + args.VerticalChange, hitThumb.DesiredSize.Height);
@@ -426,18 +424,16 @@ namespace DemoPaint
                 adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange, hitThumb.DesiredSize.Width);
         }
 
-
         // Arrange the Adorners.
         protected override Size ArrangeOverride(Size finalSize)
         {
-            // desiredWidth and desiredHeight are the width and height of the element that's being adorned.  
-            // These will be used to place the ResizingAdorner at the corners of the adorned element.  
+            // desiredWidth and desiredHeight are the width and height of the element that's being adorned.
+            // These will be used to place the ResizingAdorner at the corners of the adorned element.
             double desiredWidth = AdornedElement.DesiredSize.Width;
             double desiredHeight = AdornedElement.DesiredSize.Height;
             // adornerWidth & adornerHeight are used for placement as well.
             double adornerWidth = this.DesiredSize.Width;
             double adornerHeight = this.DesiredSize.Height;
-
 
             if (bottomEdge != null)
                 bottomEdge.Arrange(new Rect(desiredWidth / 2 - adornerWidth / 2, desiredHeight - adornerHeight / 2, adornerWidth, adornerHeight));
@@ -450,9 +446,9 @@ namespace DemoPaint
             return finalSize;
         }
 
-        // Helper method to instantiate the corner Thumbs, set the Cursor property, 
+        // Helper method to instantiate the corner Thumbs, set the Cursor property,
         // set some appearance properties, and add the elements to the visual tree.
-        void BuildAdornerThumb(ref Thumb cornerThumb, Cursor customizedCursor)
+        private void BuildAdornerThumb(ref Thumb cornerThumb, Cursor customizedCursor)
         {
             if (cornerThumb != null) return;
 
@@ -469,11 +465,12 @@ namespace DemoPaint
             visualChildren.Add(cornerThumb);
         }
 
-        // Override the VisualChildrenCount and GetVisualChild properties to interface with 
+        // Override the VisualChildrenCount and GetVisualChild properties to interface with
         // the adorner's visual collection.
-        protected override int VisualChildrenCount { get { return visualChildren.Count; } }
-        protected override Visual GetVisualChild(int index) { return visualChildren[index]; }
+        protected override int VisualChildrenCount
+        { get { return visualChildren.Count; } }
 
+        protected override Visual GetVisualChild(int index)
+        { return visualChildren[index]; }
     }
-
 }

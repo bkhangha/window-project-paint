@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace DemoPaint
 {
-    class DoActionEventArgs
+    internal class DoActionEventArgs
     {
         public IHanhDong hanhdong;
     }
-    delegate void DoActionHandler(object sender, DoActionEventArgs e);
 
-    class VeAbstract
+    internal delegate void DoActionHandler(object sender, DoActionEventArgs e);
+
+    internal class VeAbstract
     {
         public event DoActionHandler ActionCreated;
 
@@ -34,6 +30,7 @@ namespace DemoPaint
                 ActionCreated(this, new DoActionEventArgs() { hanhdong = hd });
             }
         }
+
         public VeAbstract(Canvas canvas, ThuocTinhVe ttv)
         {
             MyCanvas = canvas;
@@ -45,8 +42,10 @@ namespace DemoPaint
         {
             startPoint = Mouse.GetPosition(MyCanvas);
         }
+
         public virtual void XuLiMouseMove()
         { }
+
         public virtual void XuLiMouseUp()
         {
             startPoint = null;
@@ -54,10 +53,13 @@ namespace DemoPaint
 
         public virtual void Cut()
         { }
+
         public virtual void Copy()
         { }
+
         public virtual void Paste()
         { }
+
         public virtual void Delete()
         { }
     }

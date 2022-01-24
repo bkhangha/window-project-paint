@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DemoPaint
+﻿namespace DemoPaint
 {
-    enum Tools
+    internal enum Tools
     {
         Line, Ellipse, Rectangle, Circle, Square
     }
-    enum Fills
+
+    internal enum Fills
     {
         NoFill, Solid, Linear, Radial, Image
     }
-    enum OutLines
+
+    internal enum OutLines
     {
         Solid, Dot, Dash, DotDash
     }

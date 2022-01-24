@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,14 +7,13 @@ using System.Windows.Shapes;
 
 namespace DemoPaint
 {
-    class VeText : VeAbstract
+    internal class VeText : VeAbstract
     {
-        Rectangle selectRectangle;
-        TextBox currTextBox;
+        private Rectangle selectRectangle;
+        private TextBox currTextBox;
 
         public VeText(Canvas canvas, ThuocTinhVe ttv) : base(canvas, ttv)
         {
-
         }
 
         //--------------------
@@ -51,15 +46,12 @@ namespace DemoPaint
                     TextWrapping = TextWrapping.Wrap
                 };
 
-
                 Canvas.SetLeft(textblock, Canvas.GetLeft(currTextBox) + 3);
                 Canvas.SetTop(textblock, Canvas.GetTop(currTextBox) + 1);
 
                 MyCanvas.Children.Add(textblock);
                 NotifyActionCreated(new HanhDongThem(textblock));
             }
-
-
         }
 
         //-------------------------
@@ -83,7 +75,6 @@ namespace DemoPaint
                     };
 
                     MyCanvas.Children.Add(selectRectangle);
-
                 }
                 Canvas.SetLeft(selectRectangle, Math.Min(startPoint.Value.X, dropPoint.X));
                 Canvas.SetTop(selectRectangle, Math.Min(startPoint.Value.Y, dropPoint.Y));
@@ -120,7 +111,6 @@ namespace DemoPaint
 
                 currTextBox.Focus();
             }
-
         }
 
         //--------------------------------
@@ -130,19 +120,16 @@ namespace DemoPaint
             {
                 adnrLayer.Remove(currAdnr);
                 currAdnr = null;
-
             }
             if (selectRectangle != null)
             {
                 MyCanvas.Children.Remove(selectRectangle);
                 selectRectangle = null;
-
             }
             if (currTextBox != null)
             {
                 MyCanvas.Children.Remove(currTextBox);
                 currTextBox = null;
-
             }
             ///khong undo
         }

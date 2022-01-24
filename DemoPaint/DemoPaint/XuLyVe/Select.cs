@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,14 +9,13 @@ using System.Windows.Shapes;
 
 namespace DemoPaint
 {
-    class Select : VeAbstract
+    internal class Select : VeAbstract
     {
-        Rectangle selectRectangle;
-        Image currImage;
+        private Rectangle selectRectangle;
+        private Image currImage;
 
         public Select(Canvas canvas, ThuocTinhVe ttv) : base(canvas, ttv)
         {
-
         }
 
         //--------------------
@@ -55,8 +51,6 @@ namespace DemoPaint
                     };
 
                     MyCanvas.Children.Add(selectRectangle);
-
-
                 }
                 Canvas.SetLeft(selectRectangle, Math.Min(startPoint.Value.X, dropPoint.X));
                 Canvas.SetTop(selectRectangle, Math.Min(startPoint.Value.Y, dropPoint.Y));
@@ -98,7 +92,6 @@ namespace DemoPaint
                 currAdnr = new RectangleAdorner(currImage);
                 adnrLayer.Add(currAdnr);
             }
-
         }
 
         //--------------------------------
@@ -108,22 +101,18 @@ namespace DemoPaint
             {
                 adnrLayer.Remove(currAdnr);
                 currAdnr = null;
-
             }
             if (selectRectangle != null)
             {
                 MyCanvas.Children.Remove(selectRectangle);
                 selectRectangle = null;
-
             }
             if (currImage != null)
             {
                 MyCanvas.Children.Remove(currImage);
                 NotifyActionCreated(new HanhDongXoa(currImage));
                 currImage = null;
-
             }
-
         }
 
         public override void Cut()
@@ -160,7 +149,5 @@ namespace DemoPaint
                 adnrLayer.Add(currAdnr);
             }
         }
-
-
     }
 }

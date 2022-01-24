@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace DemoPaint
 {
-    class Croper
+    internal class Croper
     {
-        static public System.Windows.Controls.Image Crop(Panel displayer, double x, double y, double Width, double Height)
+        public static Image Crop(Panel displayer, double x, double y, double Width, double Height)
         {
             if (displayer == null) return null;
 
@@ -23,7 +17,7 @@ namespace DemoPaint
 
             var crop = new CroppedBitmap(rtb, new Int32Rect((int)x, (int)y, (int)Width, (int)Height));
 
-            return new System.Windows.Controls.Image() { Source = BitmapFrame.Create(crop) };
+            return new Image() { Source = BitmapFrame.Create(crop) };
         }
     }
 }

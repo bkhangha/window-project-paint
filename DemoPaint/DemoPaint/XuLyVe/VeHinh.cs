@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace DemoPaint
 {
-    class VeHinh : VeAbstract
+    internal class VeHinh : VeAbstract
     {
         private Shape currShape = null;
         private Tools currTool;
@@ -28,7 +22,6 @@ namespace DemoPaint
             shape.StrokeThickness = thuocTinhVe.currSize;
             shape.Fill = thuocTinhVe.getFillBrush();
             shape.StrokeDashArray = thuocTinhVe.OutLineType;
-
         }
 
         //--------------------
@@ -62,7 +55,6 @@ namespace DemoPaint
                         setThuocTinh(currShape);
                         MyCanvas.Children.Add(currShape);
                         NotifyActionCreated(new HanhDongThem(currShape));
-
                     }
 
                     Canvas.SetLeft(currShape, Math.Min(startPoint.Value.X, dropPoint.X));
@@ -76,8 +68,6 @@ namespace DemoPaint
                         currShape.Width = Math.Min(currShape.Width, currShape.Height);
                         currShape.Height = currShape.Width;
                     }
-
-
                 }
                 else if (currTool == Tools.Rectangle || currTool == Tools.Square)
                 {
@@ -87,7 +77,6 @@ namespace DemoPaint
                         setThuocTinh(currShape);
                         MyCanvas.Children.Add(currShape);
                         NotifyActionCreated(new HanhDongThem(currShape));
-
                     }
                     Canvas.SetLeft(currShape, Math.Min(startPoint.Value.X, dropPoint.X));
                     Canvas.SetTop(currShape, Math.Min(startPoint.Value.Y, dropPoint.Y));
@@ -100,7 +89,6 @@ namespace DemoPaint
                         currShape.Width = Math.Min(currShape.Width, currShape.Height);
                         currShape.Height = currShape.Width;
                     }
-
                 }
                 else if (currTool == Tools.Line)
                 {
@@ -110,7 +98,6 @@ namespace DemoPaint
                         setThuocTinh(currShape);
                         MyCanvas.Children.Add(currShape);
                         NotifyActionCreated(new HanhDongThem(currShape));
-
                     }
                     (currShape as Line).X1 = startPoint.Value.X;
                     (currShape as Line).Y1 = startPoint.Value.Y;
@@ -119,6 +106,7 @@ namespace DemoPaint
                 }
             }
         }
+
         public override void XuLiMouseUp()
         {
             base.XuLiMouseUp();
@@ -150,6 +138,5 @@ namespace DemoPaint
             }
             startPoint = null;
         }
-
     }
 }
